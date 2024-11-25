@@ -15,6 +15,8 @@
 from flask import Flask
 from flask import render_template
 from flask import g
+from flask import request
+from random import sample
 from .database import Database
 
 app = Flask(__name__, static_url_path="", static_folder="static")
@@ -35,6 +37,31 @@ def close_connection(exception):
 
 
 @app.route('/')
-def form():
-    # À remplacer par le contenu de votre choix.
+def index():
+    animaux = get_db().get_animaux()
+    animaux_aleatoires = sample(animaux, 5)
+    return render_template('index.html', animaux = animaux_aleatoires)
+
+@app.route('/animal/<int:id>')
+def animal(id):
+    animal = get_db().get_animal(id)
+    if not animal:
+        return render_template('error.html', message = "Animal non trouvé"), 404
+    return render_template('animal.html', animal = animal)
+
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('query', '').lower()
+    animaux = get_db().get_animaux()
+    resultats = [animal for animal in animaux if query in animal["nom"].lower() or query in animal["description"].lower()]
+    return render_template('search.html', resultats = resultats, query = query)
+
+@app.route('/adoption')
+def adoption_form():
     return render_template('form.html')
+
+@app.route('/adoption_submit')
+def adoption_submit():
+    data = request.form
+    errors = []
+    
