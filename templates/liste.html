@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Liste des animaux{% endblock %}
+
+{% block content %}
+<h1>Liste des animaux disponibles à l'adoption</h1>
+<ul>
+    {% for animal in animaux %}
+    <li>
+        <a href="/animal/{{ animal.id }}" class="animal-link">{{ animal.nom }}</a>
+        - {{ animal.espece }} : {{ animal.description }}
+    </li>
+    {% endfor %}
+</ul>
+<a href="/" class="button">Retour à l'accueil</a>
+{% endblock %}

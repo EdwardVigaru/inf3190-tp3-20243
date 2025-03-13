@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Accueil - Animaux disponibles{% endblock %}
+
+{% block content %}
+<h1>Animaux disponibles à l'adoption</h1>
+<ul> 
+    {% for animal in animaux %}
+    <li>
+        <a href="/animal/{{ animal.id }}">{{ animal.nom }}</a>
+        - {{ animal.espece }} : {{ animal.description }}
+    </li>
+    {% endfor %}
+</ul>
+<form action="/search" method="get">
+    <input type="text" name="query" placeholder="Rechercher un animal">
+    <button type="submit">Rechercher</button>
+</form>
+<a href="/adoption">
+    <button type="button">Mettre un animal en adoption</button>
+</a>
+{% endblock %}

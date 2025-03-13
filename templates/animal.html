@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ animal.nom }}{% endblock %}
+
+{% block content %}
+<h1>{{ animal.nom }}</h1>
+<p><strong>Espèce :</strong> {{ animal.espece }}</p>
+<p><strong>Race :</strong> {{ animal.race }}</p>
+<p><strong>Âge :</strong> {{ animal.age }} ans</p>
+<p><strong>Description :</strong> {{ animal.description }}</p>
+<p><strong>Adresse :</strong> {{ animal.adresse }}, {{ animal.ville }} ({{ animal.cp }})</p>
+<a href="mailto:{{ animal.courriel }}">Contacter le propriétaire</a><br>
+<a href="/">Retour à la page d'accueil</a>
+{% endblock %}

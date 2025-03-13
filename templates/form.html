@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}Mettre un animal en adoption{% endblock %}
+
+{% block content %}
+<h1>Mettez un animal en adoption</h1>
+
+{% if errors %}
+    <ul style="color: red;">
+        {% for error in errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form action="/adoption_submit" method="POST">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" value="{{ form_data.nom if form_data else '' }}" required><br>
+
+    <label for="espece">Espèce :</label>
+    <input type="text" id="espece" name="espece" value="{{ form_data.espece if form_data else '' }}" required><br>
+
+    <label for="race">Race :</label>
+    <input type="text" id="race" name="race" value="{{ form_data.race if form_data else '' }}" required><br>
+
+    <label for="age">Âge :</label>
+    <input type="number" id="age" name="age" value="{{ form_data.age if form_data else '' }}" min="0" max="30" required><br>
+
+    <label for="description">Description :</label>
+    <textarea id="description" name="description" required>{{ form_data.description if form_data else '' }}</textarea><br>
+
+    <label for="courriel">Courriel :</label>
+    <input type="email" id="courriel" name="courriel" value="{{ form_data.courriel if form_data else '' }}" required><br>
+
+    <label for="adresse">Adresse :</label>
+    <input type="text" id="adresse" name="adresse" value="{{ form_data.adresse if form_data else '' }}" required><br>
+
+    <label for="ville">Ville :</label>
+    <input type="text" id="ville" name="ville" value="{{ form_data.ville if form_data else '' }}" required><br>
+
+    <label for="cp">Code postal :</label>
+    <input type="text" id="cp" name="cp" value="{{ form_data.cp if form_data else '' }}" required><br>
+
+    <button type="submit">Soumettre</button>
+</form>
+{% endblock %}
